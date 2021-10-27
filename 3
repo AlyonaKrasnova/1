@@ -1,0 +1,181 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	int k = 0, a = 0, b = 0, c = 0;
+	string o = "один ", o1 = "сто ", o2 = "десять ", o3 = "одна ";
+	string d = "два ", d1 = "двести ", d2 = "двадцать ", d3 = "две ";
+	string t = "три ", t1 = "триста ", t2 = "тридцать ";
+	string h = "четыре ", h1 = "четыреста ", h2 = "сорок ";
+	string p = "пять ", p1 = "пятьсот ", p2 = "пятьдесят ";
+	string sh = "шесть ", sh1 = "шестьсот ", sh2 = "шестьдесят ";
+	string s = "семь ", s1 = "семьсот ", s2 = "семьдесят ";
+	string v = "восемь ", v1 = "восемьсот ", v2 = "восемьдесят ";
+	string de = "девять ", de1 = "девятьсот ", de2 = "девяноста ";
+	string des = "одиннадцать ", des1 = "двенадцать ", des2 = "тринадцать ", des3 = "четырнадцать ", des4 = "пятнадцать ", des5 = "шестнадцать ", des6 = "семнадцать ", des7 = "восемнадцать ", des8 = "девятнадцать ";
+	string dopm = "миллион ", dopm1 = "миллиона ", dopm2 = "миллионов ", dopt = "тысяч ", dopt1 = "тысяча ", dopt2 = "тысячи ";
+	string chislo = "";
+	int N, n;
+	cout << "Введите натуральное число N <10000000: "; cin>> N; cout<< endl;
+	n = N;
+	while (n != 0)
+	{
+		n /= 10;
+		k++;
+	}
+	if (k > 6)
+	{
+		a = N / 1000000;
+		b = (N / 1000) % 1000;
+		c = N % 1000;
+	}
+	else if (k > 3)
+	{
+		b = N / 1000;
+		c = N % 1000;
+	}
+	else if (k > 0) c = N;
+	if (a != 0)
+	{
+		if (a == 1) chislo += o + dopm;
+		if (a == 2 || a == 3 || a == 4)
+		{
+			if (a == 2) chislo += d;
+			else if (a == 3) chislo += t;
+			else chislo += h;
+			chislo += dopm1;
+		}
+		if (a == 5 || a == 6 || a == 7 || a == 8 || a == 9)
+		{
+			if (a == 5) chislo += p;
+			else if (a == 6) chislo += sh;
+			else if (a == 7) chislo += s;
+			else if (a == 8) chislo += v;
+			else chislo += o2;
+			chislo += dopm2;
+		}
+		if (a == 10) chislo += o2 + dopm2;
+	}
+	if (b != 0)
+	{
+		if (b / 100 != 0)
+			if (b / 100 == 1 || b / 100 == 2 || b / 100 == 3 || b / 100 == 4 || b / 100 == 5 || b / 100 == 6 || b / 100 == 7 || b / 100 == 8 || b / 100 == 9)
+				if (b / 100 == 1) chislo += o1;
+				else if (b / 100 == 2) chislo += d1;
+				else if (b / 100 == 3) chislo += t1;
+				else if (b / 100 == 4) chislo += h1;
+				else if (b / 100 == 5) chislo += p1;
+				else if (b / 100 == 6) chislo += sh1;
+				else if (b / 100 == 7) chislo += s1;
+				else if (b / 100 == 8) chislo += v1;
+				else chislo += de1;
+		b %= 100;
+		if (b / 10 != 0)
+		{
+			if (b / 10 == 1 && b % 10 != 0)
+			{
+				if (b % 10 == 1) chislo += des;
+				else if (b % 10 == 2) chislo += des1;
+				else if (b % 10 == 3) chislo += des2;
+				else if (b % 10 == 4) chislo += des3;
+				else if (b % 10 == 5) chislo += des4;
+				else if (b % 10 == 6) chislo += des5;
+				else if (b % 10 == 7) chislo += des6;
+				else if (b % 10 == 8) chislo += des7;
+				else chislo += des8;
+				chislo += dopt;
+			}
+			else if (b / 10 == 1 && b % 10 == 0) chislo += o2 + dopt;
+			else if (b / 10 == 2 || b / 10 == 3 || b / 10 == 4 || b / 10 == 5 || b / 10 == 6 || b / 10 == 7 || b / 10 == 8 || b / 10 == 9)
+				if (b / 10 == 2) chislo += d2;
+				else if (b / 10 == 3) chislo += t2;
+				else if (b / 10 == 4) chislo += h2;
+				else if (b / 10 == 5) chislo += p2;
+				else if (b / 10 == 6) chislo += sh2;
+				else if (b / 10 == 7) chislo += s2;
+				else if (b / 10 == 8) chislo += v2;
+				else if (b / 10 == 9) chislo += de2;
+		}
+		if (chislo != (des + dopt) && chislo != (des1 + dopt) && chislo != (des2 + dopt) && chislo != (des3 + dopt) && chislo != (des4 + dopt) && chislo != (des5 + dopt) && chislo != (des6 + dopt) && chislo != (des7 + dopt) && chislo != (des8 + dopt))
+		{
+			if (b % 10 == 1) chislo += o3 + dopt1;
+			else
+			{
+				if (b % 10 == 2 || b % 10 == 3 || b % 10 == 4)
+				{
+					if (b % 10 == 2) chislo += d3;
+					else if (b % 10 == 3) chislo += t;
+					else chislo += h;
+					chislo += dopt2;
+				}
+				if (b % 10 == 5 || b % 10 == 6 || b % 10 == 7 || b % 10 == 8 || b % 10 == 9)
+				{
+					if (b % 10 == 5) chislo += p;
+					else if (b % 10 == 6) chislo += sh;
+					else if (b % 10 == 7) chislo += s;
+					else if (b % 10 == 8) chislo += v;
+					else chislo += de;
+					chislo += dopt;
+				}
+			}
+		}
+	}
+	if (c != 0)
+	{
+		if (c / 100 != 0)
+			if (c / 100 == 1 || c / 100 == 2 || c / 100
+				== 3 || c / 100 == 4 || c / 100 == 5 || c / 100 == 6 || c / 100 == 7 || c / 100 == 8 || c / 100 == 9)
+				if (c / 100 == 1) chislo += o1;
+				else if (c / 100 == 2) chislo += d1;
+				else if (c / 100 == 3) chislo += t1;
+				else if (c / 100 == 4) chislo += h1;
+				else if (c / 100 == 5) chislo += p1;
+				else if (c / 100 == 6) chislo += sh1;
+				else if (c / 100 == 7) chislo += s1;
+				else if (c / 100 == 8) chislo += v1;
+				else chislo += de1;
+		c %= 100;
+		if (c / 10 != 0)
+		{
+			if (c / 10 == 1 && c % 10 != 0)
+				if (c % 10 == 1) chislo += des;
+				else if (c % 10 == 2) chislo += des1;
+				else if (c % 10 == 3) chislo += des2;
+				else if (c % 10 == 4) chislo += des3;
+				else if (c % 10 == 5) chislo += des4;
+				else if (c % 10 == 6) chislo += des5;
+				else if (c % 10 == 7) chislo += des6;
+				else if (c % 10 == 8) chislo += des7;
+				else chislo += des8;
+			else if (c / 10 == 1 && c % 10 == 0) chislo += o2;
+			else if (c / 10 == 2 || c / 10 == 3 || c / 10 == 4 || c / 10 == 5 || c / 10 == 6 || c / 10 == 7 || c / 10 == 8 || c / 10 == 9)
+				if (c / 10 == 2) chislo += d2;
+				else if (c / 10 == 3) chislo += t2;
+				else if (c / 10 == 4) chislo += h2;
+				else if (c / 10 == 5) chislo += p2;
+				else if (c / 10 == 6) chislo += sh2;
+				else if (c / 10 == 7) chislo += s2;
+				else if (c / 10 == 8) chislo += v2;
+				else if (c / 10 == 9) chislo += de2;
+		}
+		if (chislo < des && chislo < des1 && chislo < des2 && chislo < des3 && chislo < des4 && chislo < des5 && chislo < des6 && chislo < des7 && chislo < des8)
+		{
+			if (c % 10 == 1) chislo += o3;
+			else if (c % 10 == 2 || c % 10 == 3 || c % 10 == 4)
+				if (c % 10 == 2) chislo += d;
+				else if (c % 10 == 3) chislo += t;
+				else chislo += h;
+			if (c % 10 == 5 || c % 10 == 6 || c % 10 == 7 || c % 10 == 8 || c % 10 == 9)
+				if (c % 10 == 5) chislo += p;
+				else if (c % 10 == 6) chislo += sh;
+				else if (c % 10 == 7) chislo += s;
+				else if (c % 10 == 8) chislo += v;
+				else chislo += de;
+		}
+	}
+	cout<< chislo;
+}
